@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <user_details>
+        <saludo>Hola, {user.name} {user.lastName}!</saludo>
+        <mensaje>Este es un mensaje XML generado automáticamente por tu proceso batch de Quarkus.</mensaje>
+    </user_details>
+    <user_info>
+        <mensaje>Tus datos registrados son:</mensaje>
+        <dni>{user.dni}</dni>
+        <email>{user.email}</email>
+        <mensaje>¡Gracias por tu atención!</mensaje>
+    </user_info>
+</data>
