@@ -6,7 +6,6 @@
     </user_details>
     <user_info>
         <mensaje>Tus datos registrados son:</mensaje>
-        <id>{user.id}</id>
         <dni>{user.dni}</dni>
         <email>{user.email}</email>
         <mensaje>¡Gracias por tu atención!</mensaje>

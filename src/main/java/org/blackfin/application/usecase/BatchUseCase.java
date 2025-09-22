@@ -7,8 +7,6 @@ import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-import java.util.function.Supplier;
-
 @ApplicationScoped
 public class BatchUseCase {
 
@@ -22,7 +20,10 @@ public class BatchUseCase {
     public Uni<Void> run() {
         return userRepository.findAll()
                 .onItem().call(user -> emailService.sendNotification(user)
-                        .onFailure().recoverWithItem((Supplier<Void>) null))
+                        .onFailure().recoverWithItem(t -> {
+                            System.err.println("Error enviando email a " + user.getEmail() + ": " + t.getMessage());
+                            return null; // Continuar con el siguiente usuario
+                        }))
                 .collect().asList() // Recolecta los resultados en una lista
                 .replaceWithVoid(); // Y luego reemplaza con void para indicar el fin
     }
