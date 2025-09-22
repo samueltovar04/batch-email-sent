@@ -1,6 +1,7 @@
 package org.blackfin.application.usecase;
 
 import io.quarkus.hibernate.reactive.panache.common.WithSession;
+import io.quarkus.logging.Log;
 import org.blackfin.application.port.UserRepository;
 import org.blackfin.infrastructure.service.EmailService;
 import io.smallrye.mutiny.Uni;
@@ -21,7 +22,7 @@ public class BatchUseCase {
         return userRepository.findAll()
                 .onItem().call(user -> emailService.sendNotification(user)
                         .onFailure().recoverWithItem(t -> {
-                            System.err.println("Error enviando email a " + user.getEmail() + ": " + t.getMessage());
+                            Log.error("Error enviando email a " + user.getEmail() + ": " + t.getMessage());
                             return null; // Continuar con el siguiente usuario
                         }))
                 .collect().asList() // Recolecta los resultados en una lista
