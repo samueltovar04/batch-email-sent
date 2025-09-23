@@ -10,7 +10,6 @@ import lombok.*;
 @Table(name = "user_table")
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity extends PanacheEntity {
